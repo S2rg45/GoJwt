@@ -15,8 +15,8 @@ func mapUrls(){
 	apiRoutes := router.Group("/API",  middleware.AuthorizeJWT())
 	{
 		apiRoutes.GET("/ping", ping.Ping)
-		apiRoutes.GET("users/:user_id", users.GetUser)
+		apiRoutes.GET("/users/:user_id", users.GetUser)
 		// apiRoutes.GET("users/search", controllers.SearchUser)
-		apiRoutes.POST("users", users.CreateUser)
+		apiRoutes.POST("/users", users.CreateUser)
 	}
 }
