@@ -4,13 +4,12 @@ import (
 	"fmt"
 	"os"
 	"time"
-
 	"github.com/dgrijalva/jwt-go"
 )
 
 //jwt service
 type JWTService interface {
-	GenerateToken(email string, isUser bool) string
+	GenerateToken(name string, admin bool) string
 	ValidateToken(token string) (*jwt.Token, error)
 }
 type authCustomClaims struct {
@@ -46,7 +45,7 @@ func (service *jwtServices) GenerateToken(email string, isUser bool) string {
 		email,
 		isUser,
 		jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour * 48).Unix(),
+			ExpiresAt: time.Now().Add(time.Minute * 5).Unix(),
 			Issuer:    service.issure,
 			IssuedAt:  time.Now().Unix(),
 		},
@@ -56,7 +55,7 @@ func (service *jwtServices) GenerateToken(email string, isUser bool) string {
 	//encoded string
 	t, err := token.SignedString([]byte(service.secretKey))
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return t
 }
@@ -67,7 +66,6 @@ func (service *jwtServices) ValidateToken(encodedToken string) (*jwt.Token, erro
 			return nil, fmt.Errorf("Invalid token", token.Header["alg"])
 
 		}
-		
 		return []byte(service.secretKey), nil
 	})
 

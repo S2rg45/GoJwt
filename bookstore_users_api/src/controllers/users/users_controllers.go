@@ -15,7 +15,7 @@ import (
 var (
 	loginService    service.LoginService       = service.StaticLoginService()
 	jwtService      service.JWTService         = service.JWTAuthService()
-	loginController 						   = controller.LoginHandler(loginService, jwtService)
+	loginController 						   = login.LoginHandler(loginService, jwtService)
 )
 
 func GetUser(c *gin.Context){

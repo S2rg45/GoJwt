@@ -25,3 +25,11 @@ func NewNotFoundError(message string) *RestErr{
 		Error: "not_found",
 	}
 }
+
+func FailToken(message string) *RestErr{
+	return &RestErr{
+		Message: message,
+		Status: http.StatusUnauthorized,
+		Error: "not_authorized",
+	}
+}

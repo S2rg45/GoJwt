@@ -11,7 +11,7 @@ var (
 )
 
 
-func (user *User) Get() *errors.RestErr {
+func (user *User) Get()  *errors.RestErr {
 	result := usersDB[user.Id]
 	if result == nil {
 		return errors.NewNotFoundError(fmt.Sprintf("user %d not found", user.Id))

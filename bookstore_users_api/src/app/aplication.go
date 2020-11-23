@@ -1,6 +1,6 @@
 package app
 
-import(
+import (
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,6 +10,6 @@ var (
 
 func StartApplication(){
 	// router := gin.Default()
-	mapUrls()
-	router.Run() 
+	mapUrlsToken()
+	router.Run(":8082") 
 }
